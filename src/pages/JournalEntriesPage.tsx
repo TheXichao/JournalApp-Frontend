@@ -1,5 +1,5 @@
-import useUser from "../hooks/useUser";
 import useApi from "../api/useApi";
+import useUserContext from "../hooks/useUserContext";
 
 interface Entry {
   entry_id: number;
@@ -9,10 +9,10 @@ interface Entry {
 }
 
 export default function JournalEntriesPage() {
-  const { getUser } = useUser();
-  const myUser = getUser();
+  const { user } = useUserContext();
+  console.log("user", user);
 
-  const myToken = myUser?.authToken;
+  const myToken = user?.authToken;
   const { isLoading, error, data, fetchData } = useApi<Entry[]>({
     url: "/entry/sample/",
     method: "get",

@@ -21,7 +21,7 @@ export default function useUser() {
         cookies.remove("user");
         console.log("User removed");
     }
-    const getUser = () => {
+    const getUser = (): User | undefined  => {
         return cookies.get("user");
     }
 

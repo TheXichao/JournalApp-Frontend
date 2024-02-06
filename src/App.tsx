@@ -1,6 +1,7 @@
 import "./App.css";
 import NavBar from "./components/layout/NavBar";
 import { Route, Routes } from "react-router-dom";
+import useUserContext from "./hooks/useUserContext";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/login/LoginPage";
@@ -14,38 +15,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [token, setToken] = useState<string | undefined>(undefined);
-  const [userInfo, setUserInfo] = useState<string | undefined>(undefined);
+  const { user } = useUserContext();
 
   // Check if the user is logged in
   const cookies = new Cookies();
 
-  useEffect(() => {
-    setToken(cookies.get("token"));
-    setUserInfo(cookies.get("userInfo"));
-
-    if (token && userInfo) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [token, userInfo]);
-
   return (
     <div className="App">
       <div className="routes">
-        <NavBar
-          isAuthenticated={isLoggedIn}
-          onLogout={() => {
-            cookies.remove("token");
-            cookies.remove("userInfo");
-            console.log(token, userInfo);
-            setIsLoggedIn(false);
-            setToken(undefined);
-            setUserInfo(undefined);
-          }}
-        />
+        <NavBar isAuthenticated={!user ? false : true} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -56,7 +34,7 @@ function App() {
 
           <Route
             path="/profile"
-            element={isLoggedIn ? <ProfilePage /> : <RedirectToLogin />}
+            element={user ? <ProfilePage /> : <RedirectToLogin />}
           />
         </Routes>
       </div>

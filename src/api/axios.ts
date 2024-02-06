@@ -14,13 +14,12 @@ export const myApiCall: AxiosInstance = axios.create({
 
 // Add a request interceptor to add the token to the request header
 myApiCall.interceptors.request.use(config => {
-    const {token, isLoggedIn} = getAuthTokenFromCookie();
-    if (isLoggedIn && token) {
-        config.headers.Authorization = `Token ${token}`;
+    const { token } = getAuthTokenFromCookie();
+    if (token) {
+        config.headers
     }
     return config;
-    }, error => {
-    return Promise.reject(error);
-    });
+}
+);
 
 

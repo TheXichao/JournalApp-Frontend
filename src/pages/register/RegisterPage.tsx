@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
-import useApi from "../../api/useAPI";
-import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { set } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import useApi from "../../api/useApi";
 
 interface User {
   user_id: number;
   email: string;
   first_name: string;
   last_name: string;
-}
-interface RegisterResponseData {
-  token: string;
-  user: User;
 }
 interface registerRequestData {
   email: string;
@@ -26,9 +21,9 @@ export default function RegisterPage(): JSX.Element {
   const [registerRequestData, setregisterRequestData] =
     useState<registerRequestData>({} as registerRequestData);
   const navigate = useNavigate();
-  const cookies = new Cookies();
+  const { login } = useAuth();
 
-  const { isLoading, error, data, fetchData } = useApi<RegisterResponseData>({
+  const { isLoading, error, data, fetchData } = useApi<User>({
     url: "/user/register/",
     method: "post",
     data: {
@@ -41,10 +36,8 @@ export default function RegisterPage(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      cookies.set("token", data.token, { path: "/" });
-      cookies.set("userInfo", JSON.stringify(data.user), { path: "/" });
-
       // redirect to profile page
+      login(data);
       navigate("/profile");
     }
   }, [data]);
@@ -97,8 +90,13 @@ export default function RegisterPage(): JSX.Element {
       />
       {isLoading && <div>Loading...</div>}
       {error && <div>{error.message}</div>}
-      {data && <div>Token: {data.token}</div>}
-      {data && <div>User info: {JSON.stringify(data.user)}</div>}
+      {data && (
+        <div>
+          Registered successfully
+          <div>Welcome {data.first_name}</div>
+        </div>
+      )}
+
       <br />
 
       <input

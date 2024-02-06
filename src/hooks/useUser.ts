@@ -11,7 +11,7 @@ export interface User {
     authToken?: string;
   }
 export default function useUser() {
-    const { user, updateUser } = useUserContext();
+    const { updateUser } = useUserContext();
 
     const cookies = new Cookies();
 

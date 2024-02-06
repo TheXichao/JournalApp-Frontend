@@ -1,5 +1,6 @@
 import useApi from "../api/useApi";
 import useUserContext from "../hooks/useUserContext";
+import { Navigate } from "react-router-dom";
 
 interface Entry {
   entry_id: number;
@@ -7,6 +8,11 @@ interface Entry {
   content: string;
   date: string;
 }
+
+// piece of code used to test wether my token is being passed to the backend
+// interface message {
+//   message: string;
+// }
 
 export default function JournalEntriesPage() {
   const { user } = useUserContext();
@@ -36,7 +42,7 @@ export default function JournalEntriesPage() {
         ))}
       </ul>
 
-      <button onClick={fetchData}>Get Posts</button>
+      <button onClick={fetchData}>Get Entries</button>
     </div>
   );
 }

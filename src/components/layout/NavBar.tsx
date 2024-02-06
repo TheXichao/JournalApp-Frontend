@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import useAuth from "../../hooks/useAuth";
 
 export default function NavBar({
   isAuthenticated,
-  onLogout,
 }: {
   isAuthenticated: boolean;
-  onLogout: () => void;
 }) {
+  const { logout } = useAuth();
   return (
     <nav>
       <ul>
@@ -26,7 +26,7 @@ export default function NavBar({
               <Link to="/entries">Entries</Link>
             </li>
             <li>
-              <button onClick={onLogout}>Logout</button>
+              <button onClick={logout}>Logout</button>
             </li>
           </>
         ) : (

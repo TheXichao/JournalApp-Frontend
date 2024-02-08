@@ -2,14 +2,32 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { User } from "../hooks/useUser";
 import useUser from "../hooks/useUser";
+import useApi from "../api/useApi";
+
+interface requestFeedback {
+  message: string;
+}
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { getUser } = useUser();
+  const [isChecked, setIsChecked] = useState<boolean | null>(null);
   const [myUser, setMyUser] = useState<User | null>(null);
+  const { isLoading, error, data, fetchData } = useApi<requestFeedback>({
+    url: "/user/update_email_prompt/",
+    method: "POST",
+    data: {
+      email_prompt: isChecked,
+    },
+    headers: {
+      Authorization: `Token ${myUser?.authToken}`,
+    },
+  });
 
   function updateEmailJournal() {
     console.log("Updating email journal");
+    const myToken = myUser?.authToken;
+    fetchData();
   }
 
   useEffect(() => {
@@ -20,6 +38,7 @@ export default function ProfilePage() {
       navigate("/login");
     }
   }, []);
+
   if (!myUser) {
     return <div>user not found</div>;
   } else {
@@ -75,9 +94,19 @@ export default function ProfilePage() {
                 type="checkbox"
                 id="emailJournal"
                 name="emailJournal"
-                value="emailJournal"
+                checked={null ? myUser.email_prompt : myUser.email_prompt}
+                onChange={(event) => {
+                  setIsChecked(event.target.checked);
+                }}
               />
-              <button onSubmit={updateEmailJournal}>Save</button>
+              {error && <div>Error: {error.message}</div>}
+              {isLoading && <div>Loading...</div>}
+              <input
+                disabled={isLoading}
+                type="button"
+                value="save"
+                onClick={updateEmailJournal}
+              />
             </div>
           </div>
         </div>

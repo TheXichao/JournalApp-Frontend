@@ -2,13 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useApi from "../../api/useApi";
+import { User } from "../../hooks/useUser";
 
-interface User {
-  user_id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-}
 interface registerRequestData {
   email: string;
   password: string;

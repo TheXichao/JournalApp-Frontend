@@ -9,6 +9,7 @@ export interface User {
     first_name: string;
     last_name: string;
     authToken?: string;
+    email_prompt: boolean;
   }
 export default function useUser() {
     const { updateUser } = useUserContext();

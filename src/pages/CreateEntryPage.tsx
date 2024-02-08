@@ -32,7 +32,9 @@ export default function CreateEntryPage() {
   const onCreateEntry = () => {
     fetchData();
     console.log("Creating entry...");
-    navigate("/entries");
+    if (data) {
+      navigate("/entries");
+    }
   };
 
   return (

@@ -4,16 +4,17 @@ import useApi from "../../api/useApi";
 import { User } from "../../hooks/useUser";
 import useAuth from "../../hooks/useAuth";
 
-// interface LoginResponseData {
-//   token: string;
-//   user: User;
-// }
-
 export default function LoginPage(): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated() === true) {
+      navigate("/profile");
+    }
+  }, []);
 
   const { isLoading, error, data, fetchData } = useApi<User>({
     url: "/user/login/",
@@ -41,13 +42,13 @@ export default function LoginPage(): JSX.Element {
       <input
         placeholder="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(event) => setEmail(event.target.value)}
       />
       <input
         type="password"
         placeholder="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(event) => setPassword(event.target.value)}
       />
       {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}

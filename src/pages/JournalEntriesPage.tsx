@@ -1,6 +1,5 @@
 import useApi from "../api/useApi";
 import useUserContext from "../hooks/useUserContext";
-import { Navigate } from "react-router-dom";
 
 interface Entry {
   entry_id: number;
@@ -20,15 +19,18 @@ export default function JournalEntriesPage() {
 
   const myToken = user?.authToken;
   const { isLoading, error, data, fetchData } = useApi<Entry[]>({
-    url: "/entry/sample/",
+    url: "/entry/getEntries/",
     method: "get",
     headers: {
       Authorization: `Token ${myToken}`,
     },
   });
+  const ids = data?.map((entry) => entry.entry_id);
+  console.log("ids", ids);
   return (
     <div>
       <h1>Fetched Posts</h1>
+      {/* {console.log("error", error)} */}
       {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
 

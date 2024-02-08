@@ -17,7 +17,11 @@ export default function useUser() {
     const cookies = new Cookies();
 
     const addUser = (user: User) => {
-        cookies.set("user", user, { path: "/" });
+        cookies.set("user", user, { path: "/",
+        secure: true,
+        sameSite: "strict"
+
+    });
         updateUser(user);
         console.log("User added");
     }

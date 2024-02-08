@@ -5,7 +5,7 @@ interface Entry {
   entry_id: number;
   title: string;
   content: string;
-  date: string;
+  creation_date: string;
 }
 
 // piece of code used to test wether my token is being passed to the backend
@@ -29,7 +29,7 @@ export default function JournalEntriesPage() {
   console.log("ids", ids);
   return (
     <div>
-      <h1>Fetched Posts</h1>
+      <h1>Fetched entries</h1>
       {/* {console.log("error", error)} */}
       {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
@@ -38,8 +38,11 @@ export default function JournalEntriesPage() {
         {data?.map((post) => (
           <li key={post.entry_id}>
             <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <p>{post.date}</p>
+            <p>
+              date: {post.creation_date}
+              <br />
+              {post.content}
+            </p>
           </li>
         ))}
       </ul>

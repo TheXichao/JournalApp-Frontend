@@ -7,9 +7,8 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
-import EntryDetailPage from "./pages/EntryDetailPage";
-import JournalEntriesPage from "./pages/JournalEntriesPage";
-import CreateEntryPage from "./pages/CreateEntryPage";
+import JournalEntriesPage from "./pages/entry/JournalEntriesPage";
+import CreateEntryPage from "./pages/entry/CreateEntryPage";
 
 import Cookies from "universal-cookie";
 import { useEffect, useState } from "react";
@@ -32,7 +31,6 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/entries" element={<JournalEntriesPage />} />
           <Route path="/create-entry" element={<CreateEntryPage />} />
-          <Route path="/entries/:id" element={<EntryDetailPage />} />
 
           <Route
             path="/profile"

@@ -27,7 +27,7 @@ export default function ProfilePage() {
   function updateEmailJournal() {
     console.log("Updating email journal");
     const myToken = myUser?.authToken;
-    fetchData();
+    fetchData(); // This will trigger the API call
   }
 
   useEffect(() => {
@@ -90,23 +90,26 @@ export default function ProfilePage() {
               <label htmlFor="emailJournal">
                 Would you like daily Journal Email feature:
               </label>
-              <input
-                type="checkbox"
-                id="emailJournal"
-                name="emailJournal"
-                checked={null ? myUser.email_prompt : myUser.email_prompt}
-                onChange={(event) => {
-                  setIsChecked(event.target.checked);
-                }}
-              />
-              {error && <div>Error: {error.message}</div>}
-              {isLoading && <div>Loading...</div>}
-              <input
-                disabled={isLoading}
-                type="button"
-                value="save"
-                onClick={updateEmailJournal}
-              />
+              <div className="emailJournalCheckbox">
+                <input
+                  type="checkbox"
+                  id="emailJournal"
+                  name="emailJournal"
+                  checked={myUser.email_prompt}
+                  onChange={(event) => {
+                    setIsChecked(event.target.checked);
+                  }}
+                />
+                {isChecked ? "yes" : "no"}
+                {error && <div>Error: {error.message}</div>}
+                {isLoading && <div>Loading...</div>}
+                <input
+                  disabled={isLoading}
+                  type="button"
+                  value="save"
+                  onClick={updateEmailJournal}
+                />
+              </div>
             </div>
           </div>
         </div>

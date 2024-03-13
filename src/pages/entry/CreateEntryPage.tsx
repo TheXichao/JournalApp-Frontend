@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import useApi from "../api/useApi";
-import useUserContext from "../hooks/useUserContext";
+import useApi from "../../api/useApi";
+import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 
 interface requestFeedback {
   message: string;
@@ -12,7 +11,6 @@ export default function CreateEntryPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const { user } = useUserContext();
-  const { isAuthenticated } = useAuth();
 
   const navigate = useNavigate();
   const myToken = user?.authToken;

@@ -10,11 +10,12 @@ export default function LoginPage(): JSX.Element {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
 
+  // https://dmitripavlutin.com/react-useeffect-explanation/
   useEffect(() => {
     if (isAuthenticated() === true) {
       navigate("/profile");
     }
-  }, []);
+  }, [isAuthenticated]);
 
   const { isLoading, error, data, fetchData } = useApi<User>({
     url: "/user/login/",

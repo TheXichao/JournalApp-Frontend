@@ -11,7 +11,6 @@ export default function CreateEntryPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const { user } = useUserContext();
-
   const navigate = useNavigate();
   const myToken = user?.authToken;
 

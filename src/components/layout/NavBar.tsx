@@ -26,6 +26,9 @@ export default function NavBar({
               <Link to="/entries">Entries</Link>
             </li>
             <li>
+              <Link to="/create-entry">Create</Link>
+            </li>
+            <li>
               <button onClick={logout}>Logout</button>
             </li>
           </>

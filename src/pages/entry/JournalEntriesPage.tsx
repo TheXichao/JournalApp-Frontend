@@ -31,9 +31,10 @@ export default function JournalEntriesPage() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   // Slice the array of entries to get only the items for the current page, empty array if no entries
-  const currentItems = entries
-    ? entries.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
+  const currentItems = sortEntriesByDate(entries, sortOrder).slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   // Calculate the total number of pages
   const totalPages = entries ? Math.ceil(entries.length / itemsPerPage) : 1;

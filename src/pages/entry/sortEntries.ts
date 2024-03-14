@@ -1,6 +1,9 @@
 import { Entry} from "./JournalEntriesPage";
 
-export function sortEntriesByDate(entries: Entry[], sortOrder: string): Entry[] {
+export function sortEntriesByDate(entries: Entry[] | null, sortOrder: string): Entry[] {
+    if (!entries) {
+        return [];
+    }
   return entries.sort((a, b) => {
     if (sortOrder === "desc") {
       return (

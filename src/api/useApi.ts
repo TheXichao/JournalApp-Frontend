@@ -1,11 +1,11 @@
 import { useState,  useCallback } from "react";
-import  { AxiosRequestConfig, AxiosResponse } from "axios";
+import  { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { myApiCall } from "./axios";
 
 // Define a generic interface for the hook's return type
 interface ApiHookState<T> {
   isLoading: boolean;
-  error: any; // Consider using a more specific error type
+  error: AxiosError | null; 
   data: T | null;
   fetchData: () => Promise<void>;
 }

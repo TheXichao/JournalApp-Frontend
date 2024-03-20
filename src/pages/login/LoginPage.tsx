@@ -52,7 +52,8 @@ export default function LoginPage(): JSX.Element {
         onChange={(event) => setPassword(event.target.value)}
       />
       {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
+      {error && <div>{error.message}</div>}
+      {error && <div>{JSON.stringify(error.response?.data)}</div>}
       {data && <div>Logged in!</div>}
       {data && <div>{JSON.stringify(data)}</div>}
 

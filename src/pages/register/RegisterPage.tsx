@@ -85,6 +85,7 @@ export default function RegisterPage(): JSX.Element {
       />
       {isLoading && <div>Loading...</div>}
       {error && <div>{error.message}</div>}
+      {error && <div>{JSON.stringify(error.response?.data)}</div>}
       {data && (
         <div>
           Registered successfully

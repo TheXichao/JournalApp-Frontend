@@ -2,7 +2,7 @@ import useApi from "../../api/useApi";
 import useUserContext from "../../hooks/useUserContext";
 import { useEffect, useState } from "react";
 import { sortEntriesByDate } from "./sortEntries";
-import { set } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export interface Entry {
   entry_id: number;
@@ -14,6 +14,8 @@ export interface Entry {
 export default function JournalEntriesPage() {
   const { user } = useUserContext();
   const myToken = user?.authToken;
+
+  const navigate = useNavigate();
 
   const [sortOrder, setSortOrder] = useState("desc");
   const [entries, setEntries] = useState<Entry[] | null>(
@@ -61,7 +63,9 @@ export default function JournalEntriesPage() {
   if (user === null || user === undefined) {
     return (
       <>
-        <div>Not logged in</div>
+        <div>You are not logged in please either login or register</div>
+        <button onClick={() => navigate("/login")}>Login</button>
+        <button onClick={() => navigate("/register")}>Register</button>
       </>
     );
   }
@@ -123,19 +127,4 @@ export default function JournalEntriesPage() {
       </>
     );
   }
-}
-
-{
-  /* <ul>
-{sortedData?.map((post) => (
-  <li key={post.entry_id}>
-    <h2>{post.title}</h2>
-    <p>
-      date: {post.creation_date}
-      <br />
-      {post.content}
-    </p>
-  </li>
-))}
-</ul> */
 }

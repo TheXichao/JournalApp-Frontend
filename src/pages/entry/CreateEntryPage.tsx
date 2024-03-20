@@ -8,11 +8,13 @@ interface requestFeedback {
 }
 
 export default function CreateEntryPage() {
+  const { user } = useUserContext();
+  const myToken = user?.authToken;
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const { user } = useUserContext();
+
   const navigate = useNavigate();
-  const myToken = user?.authToken;
 
   const { isLoading, error, data, fetchData } = useApi<requestFeedback>({
     url: "/entry/createEntry/",
@@ -25,6 +27,16 @@ export default function CreateEntryPage() {
       Authorization: `Token ${myToken}`,
     },
   });
+
+  if (user === null || user === undefined) {
+    return (
+      <>
+        <div>You are not logged in please either login or register</div>
+        <button onClick={() => navigate("/login")}>Login</button>
+        <button onClick={() => navigate("/register")}>Register</button>
+      </>
+    );
+  }
 
   const onCreateEntry = () => {
     fetchData();

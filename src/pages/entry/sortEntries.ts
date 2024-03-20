@@ -1,8 +1,10 @@
 import { Entry} from "./JournalEntriesPage";
 
-export function sortEntriesByDate(entries: Entry[] | null, sortOrder: string): Entry[] {
+
+// quick sort algorithm that
+export function sortEntriesByDate(entries: Array<Entry> | null, sortOrder: string): Entry[] {
     if (!entries) {
-        return [];
+        return Array<Entry>();
     }
   return entries.sort((a, b) => {
     if (sortOrder === "desc") {

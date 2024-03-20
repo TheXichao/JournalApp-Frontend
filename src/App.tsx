@@ -42,6 +42,7 @@ function App() {
   );
 }
 
+// Redirect to login page if user is not logged in
 function RedirectToLogin() {
   const navigate = useNavigate();
 

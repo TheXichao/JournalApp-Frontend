@@ -85,7 +85,14 @@ export default function ProfilePage() {
               value={myUser.authToken}
               readOnly
             />
-            <div className="entries"></div>
+
+            <div>
+              <button onClick={() => navigate("/statistics")}>
+                View Statistics
+              </button>
+            </div>
+
+            {/* <div className="entries"></div>
             <div className="emailJournal">
               <label htmlFor="emailJournal">
                 Would you like daily Journal Email feature:
@@ -101,8 +108,6 @@ export default function ProfilePage() {
                   }}
                 />
                 {isChecked ? "yes" : "no"}
-                {error && <div>Error: {error.message}</div>}
-                {isLoading && <div>Loading...</div>}
                 <input
                   disabled={isLoading}
                   type="button"
@@ -110,7 +115,9 @@ export default function ProfilePage() {
                   onClick={updateEmailJournal}
                 />
               </div>
-            </div>
+              {error && <div>Error: {error.message}</div>}
+              {isLoading && <div>Loading...</div>}
+            </div> */}
           </div>
         </div>
       </div>

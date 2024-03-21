@@ -9,6 +9,7 @@ import RegisterPage from "./pages/register/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import JournalEntriesPage from "./pages/entry/JournalEntriesPage";
 import CreateEntryPage from "./pages/entry/CreateEntryPage";
+import StatisticsPage from "./pages/statistics/StatisticsPage";
 
 import Cookies from "universal-cookie";
 import { useEffect, useState } from "react";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/entries" element={<JournalEntriesPage />} />
           <Route path="/create-entry" element={<CreateEntryPage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
 
           <Route
             path="/profile"

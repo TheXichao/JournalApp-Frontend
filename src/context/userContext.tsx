@@ -22,7 +22,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const cookies = new Cookies();
   const [user, setUser] = useState<User | null>(() => {
-    // my ingious way to prevent my user being lost on refresh
+    // prevent my user being lost on refresh
     const savedUser = cookies.get("user");
     if (savedUser) {
       return savedUser;

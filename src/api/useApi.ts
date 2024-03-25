@@ -2,7 +2,7 @@ import { useState,  useCallback } from "react";
 import  { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { myApiCall } from "./axios";
 
-// Define a generic interface for the hook's return type
+// generic interface for the hook's return type
 interface ApiHookState<T> {
   isLoading: boolean;
   error: AxiosError | null; 
@@ -10,7 +10,6 @@ interface ApiHookState<T> {
   fetchData: () => Promise<void>;
 }
 
-// A generic function that accepts the URL, method, request body, and an optional trigger
 export default function useApi<T>(
   config: AxiosRequestConfig,
 ): ApiHookState<T> {
